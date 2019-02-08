@@ -1,0 +1,9 @@
+image : node:8.11.3
+
+stages:
+    - test
+    
+testing:
+    stage: test
+    script:
+        - yarn test
