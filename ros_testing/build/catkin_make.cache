@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/parallels/catkin_ws/mycompanion-iot-robotics/devel -DCMAKE_INSTALL_PREFIX=/home/parallels/catkin_ws/mycompanion-iot-robotics/install -G Unix Makefiles

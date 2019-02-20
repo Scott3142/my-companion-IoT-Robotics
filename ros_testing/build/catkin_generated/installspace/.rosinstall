@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/parallels/catkin_ws/mycompanion-iot-robotics/install/setup.sh
