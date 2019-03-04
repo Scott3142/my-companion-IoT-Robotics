@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AudioAnalyser from './AudioAnalyser';
+import ImageView from './Components/ImageView';
 import './App.css';
 const ROSLIB = require('roslib');
 
@@ -41,6 +42,10 @@ class App extends Component {
     });
     this.setState({ audio });
   }
+
+  componentDidMount() {
+    this.getMicrophone();
+  }
   
   stopMicrophone() {
     this.state.audio.getTracks().forEach(track => track.stop());
@@ -66,9 +71,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="controls">
-          <button onClick={this.toggleMicrophone}>
+          {<button onClick={this.toggleMicrophone}>
             {this.state.audio ? 'Stop Microphone' : 'Enable Microphone Input'}
-          </button>
+          </button> }
         </div>
         {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
       </div>
