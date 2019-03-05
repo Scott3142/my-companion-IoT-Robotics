@@ -1,0 +1,11 @@
+<launch>
+  <param name="aiml_path" value="/home/vagrant/dev/catkin_ws/src/my_companion/aiml-data" />
+  <node name="aiml_server_client" pkg="my_companion" type="aiml_server.py" output="screen">
+  </node>
+  <include file="$(find sound_play)/soundplay_node.launch">
+  </include>
+  <node name="speech_output" pkg="my_companion" type="speech_output_pyttsx3.py" output="screen">
+  </node>
+  <node name="speech_input" pkg="my_companion" type="speech_input.py" output="screen">
+  </node>
+</launch>
