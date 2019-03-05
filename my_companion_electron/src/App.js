@@ -9,7 +9,7 @@ const ros = new ROSLIB.Ros({
 
 const topic = new ROSLIB.Topic({
       ros : ros,
-      name : 'example_topic',
+      name : '/speech/input',
       messageType: 'std_msgs/String'
 });
 
@@ -26,14 +26,21 @@ ros.on('connection', () => {
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {value: ''}
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    const message = new ROSLIB.Message({
+      data: this.state.value
+    });
+    topic.publish(message);
+    event.preventDefault();
   }
 
   handleChange(event) {
-    const message = new ROSLIB.Message({
-      data: event.target.value
-    });
-    topic.publish(message);
+    this.setState({value: event.target.value});
   }
 
   render() {
@@ -52,11 +59,12 @@ class App extends Component {
           >
             Learn React
           </a>
-	  <form>
+	        <form onSubmit={this.handleSubmit}>
            <label>
             Name:
-            <input type="text" onChange= {this.handleChange} />
+              <input type="text" onChange= {this.handleChange} />
             </label>
+            <input type="submit" value="Chat" />
           </form>
         </header>
       </div>
