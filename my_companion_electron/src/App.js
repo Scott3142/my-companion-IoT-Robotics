@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AudioAnalyser from './AudioAnalyser';
 import ImageView from './Components/ImageView';
+import NotificationPrompt from './Components/NotificationPrompt';
 import './App.css';
 const ROSLIB = require('roslib');
 
@@ -29,10 +30,13 @@ class App extends Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
-      audio: null
+      audio: null,
+      IVStatus: false,
+      NPStatus: false
     };
     this.toggleMicrophone = this.toggleMicrophone.bind(this);
-
+    this.showImageView = this.showImageView.bind(this);
+    this.showNotificationPrompt = this.showNotificationPrompt.bind(this);
   }
   
   async getMicrophone() {
@@ -60,6 +64,22 @@ class App extends Component {
     }
   }
 
+  showImageView() {
+    if (this.state.IVStatus) {
+      this.setState({IVStatus: false});
+    } else {
+      this.setState({IVStatus: true});
+    }
+  }
+
+  showNotificationPrompt() {
+    if (this.state.NPStatus) {
+      this.setState({NPStatus: false});
+    } else {
+      this.setState({NPStatus: true});
+    }
+  }
+
   handleChange(event) {
     const message = new ROSLIB.Message({
       data: event.target.value
@@ -74,8 +94,16 @@ class App extends Component {
           {<button onClick={this.toggleMicrophone}>
             {this.state.audio ? 'Stop Microphone' : 'Enable Microphone Input'}
           </button> }
+          {<button onClick={this.showImageView}>
+            {this.state.IVStatus ? 'Hide IV' : 'Show IV'}
+          </button> }
+          {<button onClick={this.showNotificationPrompt}>
+            {this.state.NPStatus ? 'Hide NP' : 'Show NP'}
+          </button> }
         </div>
         {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
+        {this.state.IVStatus ? <ImageView /> : ''}
+        {this.state.NPStatus ? <NotificationPrompt /> : ''}
       </div>
     );
   }
