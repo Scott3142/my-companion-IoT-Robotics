@@ -11,7 +11,7 @@ const ros = new ROSLIB.Ros({
 
 const topic = new ROSLIB.Topic({
       ros : ros,
-      name : 'example_topic',
+      name : '/speech/input',
       messageType: 'std_msgs/String'
 });
 
@@ -28,6 +28,7 @@ ros.on('connection', () => {
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {value: ''}
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       audio: null,
@@ -37,6 +38,7 @@ class App extends Component {
     this.toggleMicrophone = this.toggleMicrophone.bind(this);
     this.showImageView = this.showImageView.bind(this);
     this.showNotificationPrompt = this.showNotificationPrompt.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   
   async getMicrophone() {
@@ -80,11 +82,16 @@ class App extends Component {
     }
   }
 
-  handleChange(event) {
+  handleSubmit(event) {
     const message = new ROSLIB.Message({
-      data: event.target.value
+      data: this.state.value
     });
     topic.publish(message);
+    event.preventDefault();
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
   }
 
   render() {
@@ -100,6 +107,13 @@ class App extends Component {
           {<button onClick={this.showNotificationPrompt}>
             {this.state.NPStatus ? 'Hide NP' : 'Show NP'}
           </button> }
+          <form onSubmit={this.handleSubmit}>
+           <label>
+            Name:
+              <input type="text" onChange= {this.handleChange} />
+            </label>
+            <input type="submit" value="Chat" />
+        </form>
         </div>
         {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
         {this.state.IVStatus ? <ImageView /> : ''}

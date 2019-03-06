@@ -6,4 +6,6 @@ stages:
 testing:
     stage: test
     script:
-        - yarn test
+        - cd my_companion_electron
+        - npm install
+        - npm test
