@@ -19,3 +19,21 @@ def read_temp_raw():
     lines = f.readlines() # returns the text
     f.close
     return lines
+
+# Convert the value of the sensor into a temperature
+def read_temp():
+    lines = read_temp_raw() # read the temperature device file
+
+    # While the first line does not contain 'YES' then wait 0.2s and then read the device file again
+    while lines[0].strip()[-3:] != 'YES':
+        time.sleep(0.2)
+        lines = read_temp_raw
+    # Look for the position of the '=' in the second line of the device file
+    equals_pos = lines[1].find('t=')
+
+    # If the '=' is found then convert the rest of the line into degrees Celsius and take the current time stamp
+    if equals_pos != -1:
+        temp_string = lines[1][equals_pos+2:]
+        temp_c = float(temp_string) / 1000.0
+        time = datetime.datetime.now()
+        return temp_c, time.strftime("%Y-%m-%d %H:%M:%S") # Format date time into readable form
