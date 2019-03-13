@@ -37,3 +37,8 @@ def read_temp():
         temp_c = float(temp_string) / 1000.0
         time = datetime.datetime.now()
         return temp_c, time.strftime("%Y-%m-%d %H:%M:%S") # Format date time into readable form
+
+# Print temperature until program stops
+while True:
+    print(read_temp())
+    time.sleep(1)
