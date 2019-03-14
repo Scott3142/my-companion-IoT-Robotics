@@ -1,10 +1,9 @@
 package com.mycompanion.mycompanion.repository;
 
-import com.mycompanion.mycompanion.entity.User;
+import com.mycompanion.mycompanion.entity.Temperature;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUuid(Long uuid);
+public interface TemperatureRepository extends JpaRepository<Temperature, Long> {
 }
