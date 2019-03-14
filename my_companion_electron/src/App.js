@@ -15,6 +15,28 @@ const topic = new ROSLIB.Topic({
       messageType: 'std_msgs/String'
 });
 
+const temperature = new ROSLIB.Topic({
+      ros : ros,
+      name : '/temperature',
+      messageType: 'mycompanion/Temperature'
+});
+
+temperature.subscribe(function(message) {
+     console.log('Received message on ' + temperature.name + ': ' +  'Temperature: ' + message.temperature + ' Sensor Name: ' + message.sensorName);
+     let temperature = { ...message, timestamp: {"isoString": new Date().toISOString().replace('Z', '')}}
+     console.log(temperature);
+     const url = 'http://localhost:8080/api/temperatures/';
+     fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(temperature),
+        headers: {
+           'Content-Type': 'application/json',
+        }
+     })
+     .then(res => res.json())
+     .then(response => console.log('Success:', JSON.stringify(response)))
+});
+
 ros.on('connection', () => {
       console.log('Connected to websocket server.');
 
