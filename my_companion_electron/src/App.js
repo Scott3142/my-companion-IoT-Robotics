@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import AudioAnalyser from './AudioAnalyser';
+import ImageView from './Components/ImageView';
+import NotificationPrompt from './Components/NotificationPrompt';
 import './App.css';
 const ROSLIB = require('roslib');
 
@@ -28,7 +30,56 @@ class App extends Component {
     super(props);
     this.state = {value: ''}
     this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      audio: null,
+      IVStatus: false,
+      NPStatus: false
+    };
+    this.toggleMicrophone = this.toggleMicrophone.bind(this);
+    this.showImageView = this.showImageView.bind(this);
+    this.showNotificationPrompt = this.showNotificationPrompt.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  
+  async getMicrophone() {
+    const audio = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+      video: false
+    });
+    this.setState({ audio });
+  }
+
+  componentDidMount() {
+    this.getMicrophone();
+  }
+  
+  stopMicrophone() {
+    this.state.audio.getTracks().forEach(track => track.stop());
+    this.setState({ audio: null });
+  }
+  
+  toggleMicrophone() {
+    if (this.state.audio) {
+      this.stopMicrophone();
+    } else {
+      this.getMicrophone();
+    }
+  }
+
+  showImageView() {
+    if (this.state.IVStatus) {
+      this.setState({IVStatus: false});
+    } else {
+      this.setState({IVStatus: true});
+    }
+  }
+
+  showNotificationPrompt() {
+    if (this.state.NPStatus) {
+      this.setState({NPStatus: false});
+    } else {
+      this.setState({NPStatus: true});
+    }
   }
 
   handleSubmit(event) {
@@ -46,27 +97,27 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-	        <form onSubmit={this.handleSubmit}>
+        <div className="controls">
+          {<button onClick={this.toggleMicrophone}>
+            {this.state.audio ? 'Stop Microphone' : 'Enable Microphone Input'}
+          </button> }
+          {<button onClick={this.showImageView}>
+            {this.state.IVStatus ? 'Hide IV' : 'Show IV'}
+          </button> }
+          {<button onClick={this.showNotificationPrompt}>
+            {this.state.NPStatus ? 'Hide NP' : 'Show NP'}
+          </button> }
+          <form onSubmit={this.handleSubmit}>
            <label>
             Name:
               <input type="text" onChange= {this.handleChange} />
             </label>
             <input type="submit" value="Chat" />
-          </form>
-        </header>
+        </form>
+        </div>
+        {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
+        {this.state.IVStatus ? <ImageView /> : ''}
+        {this.state.NPStatus ? <NotificationPrompt /> : ''}
       </div>
     );
   }
