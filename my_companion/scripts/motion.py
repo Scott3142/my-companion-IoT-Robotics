@@ -16,3 +16,9 @@ GPIO.setup(pinpir, GPIO.IN)
 
 currentstate = 0
 previousstate = 0
+
+try:
+    print("Waiting for PIR to Settle ...")
+    # Loop until PIR output is 0
+    while GPIO.input(pinpir) == 1:
+        currentstate = 0
