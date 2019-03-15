@@ -15,3 +15,12 @@ def readldr():
     GPIO.output(pinldr, GPIO.LOW)
     time.sleep(0.1) # Drains all charge from capacitor
     GPIO.setup(pinldr, GPIO.IN) # Sets the pin to input
+
+    # While the input pin reads 'off' or LOW count
+    while (GPIO.input(pinldr) == GPIO.LOW):
+        ldrcount += 1 # Add one to the counter
+    return ldrcount
+
+while True:
+    print(readldr())
+    time.sleep(1) # Wait 1 second
