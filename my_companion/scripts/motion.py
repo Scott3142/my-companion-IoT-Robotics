@@ -38,5 +38,11 @@ try:
         elif currentstate = 0 and previousstate == 1:
             print("Ready")
             previousstate = 0
-
+        # Wait 10 milliseconds
         time.sleep(0.01)
+
+except KeyboardInterrupt:
+    print("Quit!")
+
+    # Reset GPIO settings
+    GPIO.cleanup()
