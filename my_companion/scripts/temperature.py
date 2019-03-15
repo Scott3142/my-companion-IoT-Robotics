@@ -53,8 +53,11 @@ def read_temp():
         msg.sensorName = "Kitchen"
         msg.temperature = temp_c
         msg.humidity = 0
+        msg.timestamp = time.strftime("%Y-%m-%dT%H:%M:%S.%f")
 
-        return temp_c, time.strftime("%Y-%m-%d %H:%M:%S") # Format date time into readable form
+        pub.publish(msg)
+
+        return temp_c, time.strftime("%Y-%m-%dT%H:%M:%S.%f") # Format date time into readable form
 
 # Print temperature until program stops
 while True:
