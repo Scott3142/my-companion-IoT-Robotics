@@ -26,7 +26,7 @@ public class Temperature {
         temperature.setName(dto.getSensorName());
         temperature.setTemperature(dto.getTemperature());
         temperature.setHumidity(dto.getHumidity());
-        temperature.setTimestamp(LocalDateTime.parse(dto.getTimestamp().getIsoString()));
+        temperature.setTimestamp(LocalDateTime.parse(dto.getTimestamp());
         temperature.setUser(user);
         return temperature;
     }

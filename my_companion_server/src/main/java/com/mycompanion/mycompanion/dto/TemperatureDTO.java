@@ -13,7 +13,7 @@ public class TemperatureDTO {
     private String sensorName;
     private int temperature;
     private int humidity;
-    private DateTimeDTO timestamp;
+    private String timestamp;
 
     public TemperatureDTO(String sensorName, int temperature, int humidity) {
         this.sensorName = sensorName;
@@ -21,7 +21,7 @@ public class TemperatureDTO {
         this.humidity = humidity;
     }
 
-    public TemperatureDTO(Long uuid, String sensorName, int temperature, int humidity, DateTimeDTO timestamp) {
+    public TemperatureDTO(Long uuid, String sensorName, int temperature, int humidity, String timestamp) {
         this.uuid = uuid;
         this.sensorName = sensorName;
         this.temperature = temperature;

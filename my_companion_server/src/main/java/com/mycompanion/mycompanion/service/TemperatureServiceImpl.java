@@ -26,6 +26,6 @@ public class TemperatureServiceImpl implements TemperatureService {
         User user = userRepository.findByUuid(newTemp.getUuid());
         Temperature temperature = temperatureRepository.saveAndFlush(Temperature.convertFromDto(newTemp, user));
         return new TemperatureDTO(temperature.getId(), temperature.getUser().getUuid(), temperature.getName(),
-                temperature.getTemperature(), temperature.getHumidity(), new DateTimeDTO(temperature.getTimestamp()));
+                temperature.getTemperature(), temperature.getHumidity(), temperature.getTimestamp().format(DateTimeFormatter.ISO_DATE_TIME));
     }
 }
