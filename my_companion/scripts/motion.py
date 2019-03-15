@@ -22,3 +22,15 @@ try:
     # Loop until PIR output is 0
     while GPIO.input(pinpir) == 1:
         currentstate = 0
+
+    print("Ready")
+    # Loop until user quits using CTRL-C
+    while True:
+        # Read PIR state
+        currentstate = GPIO.input(pinpir)
+
+        # If the PIR is triggered
+        if currentstate == 1 and previousstate == 0:
+            print("Motion Detected!")
+            # Record previous state
+            previousstate = 1
