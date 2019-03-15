@@ -18,17 +18,15 @@ const topic = new ROSLIB.Topic({
 const temperature = new ROSLIB.Topic({
       ros : ros,
       name : '/temperature',
-      messageType: 'mycompanion/Temperature'
+      messageType: 'my_companion/Temperature'
 });
 
 temperature.subscribe(function(message) {
      console.log('Received message on ' + temperature.name + ': ' +  'Temperature: ' + message.temperature + ' Sensor Name: ' + message.sensorName);
-     let temperature = { ...message, timestamp: {"isoString": new Date().toISOString().replace('Z', '')}}
-     console.log(temperature);
      const url = 'http://localhost:8080/api/temperatures/';
      fetch(url, {
         method: 'POST',
-        body: JSON.stringify(temperature),
+        body: JSON.stringify(message),
         headers: {
            'Content-Type': 'application/json',
         }
@@ -62,7 +60,7 @@ class App extends Component {
     this.showNotificationPrompt = this.showNotificationPrompt.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+
   async getMicrophone() {
     const audio = await navigator.mediaDevices.getUserMedia({
       audio: true,
@@ -74,12 +72,12 @@ class App extends Component {
   componentDidMount() {
     this.getMicrophone();
   }
-  
+
   stopMicrophone() {
     this.state.audio.getTracks().forEach(track => track.stop());
     this.setState({ audio: null });
   }
-  
+
   toggleMicrophone() {
     if (this.state.audio) {
       this.stopMicrophone();
