@@ -3,6 +3,8 @@ import os
 import glob
 import time
 import datetime
+import rospy
+from my_companion.msg import Temperature
 
 # Initialize the GPIO Pins
 os.system('modprobe w1-gpio')
@@ -12,6 +14,15 @@ os.system('modprobe w1-therm')
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
+
+def temp_talker():
+    rosby.init_node('temperature_node', anonymous=True)
+    r = rosby.Rate(10) #10hz
+    pub = rosby.Publisher('/temperature', Temperature)
+    rosby.spin()
+
+if __name__ == '__main__':
+    temp_talker()
 
 # Function that reads the sensor data
 def read_temp_raw():
@@ -36,6 +47,13 @@ def read_temp():
         temp_string = lines[1][equals_pos+2:]
         temp_c = float(temp_string) / 1000.0
         time = datetime.datetime.now()
+
+        msg = Temperature()
+        msg.uuid = 1
+        msg.sensorName = "Kitchen"
+        msg.temperature = temp_c
+        msg.humidity = 0
+
         return temp_c, time.strftime("%Y-%m-%d %H:%M:%S") # Format date time into readable form
 
 # Print temperature until program stops
