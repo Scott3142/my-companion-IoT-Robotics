@@ -13,3 +13,6 @@ print("PIR Motion Module Test (CTRL-C to Exit)")
 
 # Set pin as input
 GPIO.setup(pinpir, GPIO.IN)
+
+currentstate = 0
+previousstate = 0
