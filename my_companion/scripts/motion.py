@@ -34,3 +34,9 @@ try:
             print("Motion Detected!")
             # Record previous state
             previousstate = 1
+        # IF the PIR has returned to the Ready State
+        elif currentstate = 0 and previousstate == 1:
+            print("Ready")
+            previousstate = 0
+
+        time.sleep(0.01)
