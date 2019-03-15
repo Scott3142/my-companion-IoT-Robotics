@@ -14,7 +14,7 @@ pinbuzzer = 22
 
 print("PIR Motion Module Test (CTRL-C to Exit)")
 
-# Set pin as input
+# Set pin as input/output
 GPIO.setup(pinpir, GPIO.IN)
 GPIO.setup(pinredled, GPIO.OUT)
 GPIO.setup(pinblueled, GPIO.OUT)
@@ -38,8 +38,21 @@ try:
         # If the PIR is triggered
         if currentstate == 1 and previousstate == 0:
             print("Motion Detected!")
+            # Flash light and sound buzzer three times
+            for x in range(0, 3):
+                GPIO.output(pinbuzzer, GPIO.HIGH)
+                GPIO.output(pinredled, GPIO.HIGH)
+                time.sleep(0.2)
+                GPIO.output(pinredled, GPIO.LOW)
+                GPIO.output(pinblueled, GPIO.HIGH)
+                time.sleep(0.2)
+                GPIO.output(pinblueled, GPIO.LOW)
+                GPIO.output(pinbuzzer, GPIO.LOW)
+                time.sleep(0.2)
+
             # Record previous state
             previousstate = 1
+            
         # IF the PIR has returned to the Ready State
         elif currentstate = 0 and previousstate == 1:
             print("Ready")
