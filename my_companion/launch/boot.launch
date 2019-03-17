@@ -1,0 +1,16 @@
+<launch>
+  <param name="aiml_path" value="/home/pi/dev/catkin_ws/src/mycompanion-iot-robotics/my_companion/aiml-data" />
+  <node name="aiml_server_client" pkg="my_companion" type="aiml_server.py" output="screen">
+  </node>
+  <include file="$(find sound_play)/soundplay_node.launch">
+  </include>
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"></include>
+  <node name="speech_output" pkg="my_companion" type="speech_output_mycroft.py" output="screen">
+  </node>
+  <node name="speech_input" pkg="my_companion" type="speech_input.py" output="screen">
+  </node>
+  <node name="user_responses" pkg="my_companion" type="user_response.py" output="screen">
+  </node>
+  <node name="repeat_phrase" pkg="my_companion" type="repeat_phrase.py" output="screen">
+  </node> 
+</launch>
