@@ -15,6 +15,26 @@ const topic = new ROSLIB.Topic({
       messageType: 'std_msgs/String'
 });
 
+const temperature = new ROSLIB.Topic({
+      ros : ros,
+      name : '/temperature',
+      messageType: 'my_companion/Temperature'
+});
+
+temperature.subscribe(function(message) {
+     console.log('Received message on ' + temperature.name + ': ' +  'Temperature: ' + message.temperature + ' Sensor Name: ' + message.sensorName);
+     const url = 'http://localhost:8080/api/temperatures/';
+     fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(message),
+        headers: {
+           'Content-Type': 'application/json',
+        }
+     })
+     .then(res => res.json())
+     .then(response => console.log('Success:', JSON.stringify(response)))
+});
+
 ros.on('connection', () => {
       console.log('Connected to websocket server.');
 
@@ -40,7 +60,7 @@ class App extends Component {
     this.showNotificationPrompt = this.showNotificationPrompt.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+
   async getMicrophone() {
     const audio = await navigator.mediaDevices.getUserMedia({
       audio: true,
@@ -52,12 +72,12 @@ class App extends Component {
   componentDidMount() {
     this.getMicrophone();
   }
-  
+
   stopMicrophone() {
     this.state.audio.getTracks().forEach(track => track.stop());
     this.setState({ audio: null });
   }
-  
+
   toggleMicrophone() {
     if (this.state.audio) {
       this.stopMicrophone();
