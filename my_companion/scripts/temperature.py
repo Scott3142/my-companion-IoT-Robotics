@@ -15,14 +15,8 @@ base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 
-def temp_talker():
-    rosby.init_node('temperature_node', anonymous=True)
-    r = rosby.Rate(10) #10hz
-    pub = rosby.Publisher('/temperature', Temperature)
-    rosby.spin()
+pub = rospy.Publisher('/temperature', Temperature, queue_size=10)
 
-if __name__ == '__main__':
-    temp_talker()
 
 # Function that reads the sensor data
 def read_temp_raw():
@@ -49,7 +43,7 @@ def read_temp():
         time = datetime.datetime.now()
 
         msg = Temperature()
-        msg.uuid = 1
+        msg.uuid = 5
         msg.sensorName = "Kitchen"
         msg.temperature = temp_c
         msg.humidity = 0
@@ -60,6 +54,16 @@ def read_temp():
         return temp_c, time.strftime("%Y-%m-%dT%H:%M:%S.%f") # Format date time into readable form
 
 # Print temperature until program stops
-while True:
-    print(read_temp())
-    time.sleep(1)
+
+    
+def temp_talker():
+    rospy.init_node('temperature_node', anonymous=True)
+    r = rospy.Rate(10) #10hz
+    rospy.spin()
+    
+    while True:
+        rospy.loginfo(read_temp())
+        time.sleep(1)
+
+if __name__ == '__main__':
+    temp_talker()

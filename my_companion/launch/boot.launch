@@ -10,5 +10,7 @@
   <node name="user_responses" pkg="my_companion" type="user_response.py" output="screen">
   </node>
   <node name="repeat_phrase" pkg="my_companion" type="repeat_phrase.py" output="screen">
-  </node> 
+  </node>
+  <node name="temperature" pkg="my_companion" type="temperature.py" output="screen">
+  </node>
 </launch>
