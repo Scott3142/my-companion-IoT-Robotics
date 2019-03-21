@@ -3,6 +3,7 @@ package com.mycompanion.mycompanion.service;
 import com.mycompanion.mycompanion.dto.AccountDTO;
 import com.mycompanion.mycompanion.dto.ContactDTO;
 import com.mycompanion.mycompanion.dto.UserDTO;
+import com.mycompanion.mycompanion.dto.UserResponseDTO;
 import com.mycompanion.mycompanion.entity.User;
 import com.mycompanion.mycompanion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class UserServiceImpl implements UserService {
         return new UserDTO(user.getUuid(), user.getUsername(), user.getFirstName(), user.getLastName(),
                 user.getEmail(), user.getContacts().stream().map(contact -> new ContactDTO(contact.getId(), contact.getFirstName(), contact.getLastName(),
                 contact.getEmail(), contact.getPhone())).collect(Collectors.toList()));
+    }
+
+    @Override
+    public void recordUserResponse(UserResponseDTO receivedResponse) {
+
     }
 
     @Override
