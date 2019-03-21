@@ -51,6 +51,7 @@ add_message_files(
   FILES
   Temperature.msg
   UserResponse.msg
+  Mycroft.msg
 )
 
 ## Generate services in the 'srv' folder
