@@ -33,8 +33,10 @@ public class UserController {
     }
 
     @PostMapping(path = "/response", consumes = "application/json")
-    public void recordResponse(@RequestBody UserResponseDTO receivedResponse){
+    public ResponseEntity<Object> recordResponse(@RequestBody UserResponseDTO receivedResponse){
         userService.recordUserResponse(receivedResponse);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        return new ResponseEntity<>("Saved User Response", httpHeaders, HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
