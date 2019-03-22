@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AudioAnalyser from './AudioAnalyser';
 import ImageView from './Components/ImageView';
 import NotificationPrompt from './Components/NotificationPrompt';
+import AccountForm from './Components/AccountForm';
 import './App.css';
 const ROSLIB = require('roslib');
 
@@ -33,11 +34,13 @@ class App extends Component {
     this.state = {
       audio: null,
       IVStatus: false,
-      NPStatus: false
+      NPStatus: false,
+      AFStatus:true
     };
     this.toggleMicrophone = this.toggleMicrophone.bind(this);
     this.showImageView = this.showImageView.bind(this);
     this.showNotificationPrompt = this.showNotificationPrompt.bind(this);
+    this.showAccountForm = this.showAccountForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   
@@ -50,7 +53,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getMicrophone();
+    
   }
   
   stopMicrophone() {
@@ -82,6 +85,14 @@ class App extends Component {
     }
   }
 
+  showAccountForm() {
+    if (this.state.AFStatus) {
+      this.setState({AFStatus: false});
+    } else {
+      this.setState({AFStatus: true});
+    }
+  }
+
   handleSubmit(event) {
     const message = new ROSLIB.Message({
       data: this.state.value
@@ -107,6 +118,9 @@ class App extends Component {
           {<button onClick={this.showNotificationPrompt}>
             {this.state.NPStatus ? 'Hide NP' : 'Show NP'}
           </button> }
+          {<button onClick={this.showAccountForm}>
+            {this.state.AFStatus ? 'Hide AF' : 'Show AF'}
+          </button> }
           <form onSubmit={this.handleSubmit}>
            <label>
             Name:
@@ -118,6 +132,7 @@ class App extends Component {
         {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
         {this.state.IVStatus ? <ImageView /> : ''}
         {this.state.NPStatus ? <NotificationPrompt /> : ''}
+        {this.state.AFStatus ? <AccountForm /> : ''}
       </div>
     );
   }
