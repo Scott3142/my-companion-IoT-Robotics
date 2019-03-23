@@ -32,11 +32,22 @@ fieldset {
   background-color: rgba(40, 40, 40, 0.4);
 }
 
-form *:not(legend) {
+form *:not(legend):not(button) {
   display: flex;
   flex-flow: column;
   justify-content: center;
   margin: 17px auto;
+}
+
+form button {
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  margin-bottom: 20px;
+  font-size: 30pt;
+  background: #86fbff;
+  border: none;
+  box-shadow: 0px 0px 10px 1px #5599ff;
 }
 
 input {

@@ -23,6 +23,7 @@ class AccountForm extends Component {
                     <input type="email" name="eEmail" placeholder="Please enter their email"></input>
                     <input type="tel" name="ePhone" placeholder="Please enter their telephone number"></input>
                 </fieldset>
+                <button type="submit" name="submit">&#x2713;</button>      
             </form>
         );
     }

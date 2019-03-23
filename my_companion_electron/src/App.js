@@ -121,13 +121,13 @@ class App extends Component {
           {<button onClick={this.showAccountForm}>
             {this.state.AFStatus ? 'Hide AF' : 'Show AF'}
           </button> }
-          <form onSubmit={this.handleSubmit}>
+          {/* <form onSubmit={this.handleSubmit}>
            <label>
             Name:
               <input type="text" onChange= {this.handleChange} />
             </label>
             <input type="submit" value="Chat" />
-        </form>
+        </form> */}
         </div>
         {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
         {this.state.IVStatus ? <ImageView /> : ''}
