@@ -7,7 +7,7 @@ def callback(data):
     rospy.loginfo(data.type)
     uri = 'ws://localhost:8181/core'
     ws = create_connection(uri)
-    message = '{"type": "' + data.type + '", "data": ' + data.data + '}'
+    message = '{"type": "' + data.type + '", "data": "' + data.data + '"}'
     rospy.loginfo(message)
     ws.send(message)
     ws.close()
