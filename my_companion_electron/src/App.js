@@ -4,6 +4,17 @@ import ImageView from './Components/ImageView';
 import NotificationPrompt from './Components/NotificationPrompt';
 import './App.css';
 const ROSLIB = require('roslib');
+const express = window.require('express');
+const bodyParser = require('body-parser');
+
+const app = express()
+app.use(bodyParser.json());
+app.get('/', (req, res) => res.send('Hello World!'))
+app.listen(5000, () => console.log(`Example app listening on port 5000!`))
+app.post('/tweets', (req, res) => {
+  console.log(req.body);
+  res.status(200).send('ok')
+});
 
 const ros = new ROSLIB.Ros({
       url: 'ws://localhost:9090'
@@ -28,7 +39,7 @@ const twitter = new ROSLIB.Topic({
 });
 
 twitter.subscribe(function(message) {
-  console.log(message.tweets[0].permalink)
+  console.log(message.permalink)
 })
 
 temperature.subscribe(function(message) {

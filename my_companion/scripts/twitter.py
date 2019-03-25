@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import rospy
 from std_msgs.msg import String
-from my_companion.msg import Mycroft
+from my_companion.msg import Twitter
 from helpers.twitter_scraper import fetch_tweets
 from helpers.mycroft_helpers import publish_mycroft_message
 
@@ -18,7 +18,7 @@ class TweetList:
         return "{" + "\"at\":\"{at}\",\"tweets\":[".format(at=self.at) + seperator.join([x.json_string() for x in self.tweets]) + "]}"
 
 tweets = []
-pub = rospy.Publisher('/twitter/tweets', Mycroft, queue_size=10)
+pub = rospy.Publisher('/twitter/tweets', Twitter, queue_size=100)
 
 def new_tweets_json(new_tweets):
     return "{\"newTweets\":[" + ', '.join([x.json_string() for x in new_tweets]) + "]}"
@@ -43,7 +43,7 @@ def handle_tweets(event):
             new_tweets.append(temp)
     if len(new_tweets) > 0:
         rospy.loginfo('There are new Tweets available to read')
-        del new_tweets[0].tweets[1:4]
+        new_tweets[0].tweets = [new_tweets[0].tweets[0]]
         json = new_tweets_json(new_tweets)
         # ros_tweet_mycroft = Mycroft()
         # ros_tweet_mycroft.type = "skill.ros-twitter.handle.new_tweets"
@@ -56,7 +56,7 @@ def handle_tweets(event):
 def listener():
     rospy.init_node('twitter_node')
     rospy.loginfo(rospy.get_caller_id() + " started")
-    rospy.set_param('twitter/ats', ['ASOS'])
+    rospy.set_param('twitter/ats', ['ProSyn'])
     ats = rospy.get_param('twitter/ats')
     for x in ats:
         tweets.append(TweetList(x, []))
