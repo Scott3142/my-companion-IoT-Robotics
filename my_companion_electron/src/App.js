@@ -21,6 +21,16 @@ const temperature = new ROSLIB.Topic({
       messageType: 'my_companion/Temperature'
 });
 
+const twitter = new ROSLIB.Topic({
+  ros: ros,
+  name: '/twitter/tweet',
+  messageType: 'my_companion/Twitter'
+});
+
+twitter.subscribe(function(message) {
+  console.log(message.tweets[0].permalink)
+})
+
 temperature.subscribe(function(message) {
      console.log('Received message on ' + temperature.name + ': ' +  'Temperature: ' + message.temperature + ' Sensor Name: ' + message.sensorName);
      const url = 'http://localhost:8080/api/temperatures/';

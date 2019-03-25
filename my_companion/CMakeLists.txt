@@ -52,6 +52,8 @@ add_message_files(
   Temperature.msg
   UserResponse.msg
   Mycroft.msg
+  Tweet.msg
+  Twitter.msg
 )
 
 ## Generate services in the 'srv' folder
