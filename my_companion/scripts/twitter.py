@@ -2,7 +2,7 @@
 import rospy
 from std_msgs.msg import String
 from my_companion.msg import Twitter
-from helpers.twitter_scraper import fetch_tweets
+from helpers.twitter_scraper import fetch_tweets, Tweet
 from helpers.mycroft_helpers import publish_mycroft_message
 
 class TweetList:
@@ -43,20 +43,20 @@ def handle_tweets(event):
             new_tweets.append(temp)
     if len(new_tweets) > 0:
         rospy.loginfo('There are new Tweets available to read')
-        new_tweets[0].tweets = [new_tweets[0].tweets[0]]
-        json = new_tweets_json(new_tweets)
+        # new_tweets[0].tweets = [new_tweets[0].tweets[0]]
+        json_tweets = new_tweets_json(new_tweets)
         # ros_tweet_mycroft = Mycroft()
         # ros_tweet_mycroft.type = "skill.ros-twitter.handle.new_tweets"
         # ros_tweet_mycroft.data = json
-        rospy.loginfo(json)
+        rospy.loginfo(json_tweets)
         # publish_mycroft_message("skill.ros-twitter.handle.new_tweets", "{\"newTweets\":\"hello\"}")
-        publish_mycroft_message("skill.ros-twitter.handle.new_tweets", json)
+        publish_mycroft_message("skill.ros-twitter.handle.new_tweets", json_tweets)
 
 
 def listener():
     rospy.init_node('twitter_node')
     rospy.loginfo(rospy.get_caller_id() + " started")
-    rospy.set_param('twitter/ats', ['ProSyn'])
+    rospy.set_param('twitter/ats', ['cusoftacademy'])
     ats = rospy.get_param('twitter/ats')
     for x in ats:
         tweets.append(TweetList(x, []))
