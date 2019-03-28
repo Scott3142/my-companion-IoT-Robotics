@@ -13,7 +13,7 @@ class Tweet:
     def __init__(self, permalink, time, content, display_name, photos, video):
         self.permalink = permalink
         self.time = time
-        self.content = re.sub(r'\n', "", str(content))
+        self.content = re.sub(r'\n|pic.twitter.com\/[\w\d]{10}', "", str(content))
         self.display_name = display_name
         self.photos = photos
         self.video = video
