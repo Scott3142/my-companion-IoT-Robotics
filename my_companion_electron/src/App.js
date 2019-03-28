@@ -23,7 +23,7 @@ const temperature = new ROSLIB.Topic({
 
 temperature.subscribe(function(message) {
      console.log('Received message on ' + temperature.name + ': ' +  'Temperature: ' + message.temperature + ' Sensor Name: ' + message.sensorName);
-     const url = 'http://localhost:8080/api/temperatures/';
+     const url = 'http://10.72.97.47:8080/api/temperatures/';
      fetch(url, {
         method: 'POST',
         body: JSON.stringify(message),
