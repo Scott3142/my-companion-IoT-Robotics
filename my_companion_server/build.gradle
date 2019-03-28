@@ -18,7 +18,7 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'lenala.azure.azurewebapp'
+//apply plugin: 'lenala.azure.azurewebapp'
 apply plugin: 'war'
 apply plugin: "org.springframework.boot"
 apply plugin: 'application'
@@ -68,21 +68,21 @@ war {
 	enabled = true
 }
 
-azureWebApp {
-    resourceGroup = 'my-companion'
-    appName = 'my-companion-server'
-    pricingTier = 'B1'
-    region = 'UK West'
-    appService = {
-        type = 'linux'
-        runtimeStack = 'TOMCAT 9.0-jre8'
-    }
-    authentication = {
-        type = 'azurecli'
-    }
-    deployment = {
-        type = "war"
-    }
-}
+//azureWebApp {
+//    resourceGroup = 'my-companion'
+//    appName = 'my-companion-server'
+//    pricingTier = 'B1'
+//    region = 'UK West'
+//    appService = {
+//        type = 'linux'
+//        runtimeStack = 'TOMCAT 9.0-jre8'
+//    }
+//    authentication = {
+//        type = 'azurecli'
+//    }
+//    deployment = {
+//        type = "war"
+//    }
+//}
 
 
