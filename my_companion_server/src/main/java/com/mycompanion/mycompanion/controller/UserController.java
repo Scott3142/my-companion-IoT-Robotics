@@ -38,4 +38,9 @@ public class UserController {
         System.out.println("Finding user with uuid: " + uuid);
         return ResponseEntity.ok(userService.findUserWithID(uuid));
     }
+
+    @RequestMapping(path="/test")
+    public ResponseEntity<Object> test(){
+        return ResponseEntity.ok("a test string");
+    }
 }
