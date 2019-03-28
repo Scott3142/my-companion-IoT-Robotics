@@ -55,15 +55,15 @@ def read_temp():
 
 # Print temperature until program stops
 
-    
+
 def temp_talker():
     rospy.init_node('temperature_node', anonymous=True)
     r = rospy.Rate(10) #10hz
     rospy.spin()
-    
+
     while True:
         rospy.loginfo(read_temp())
-        time.sleep(1)
+        time.sleep(300)
 
 if __name__ == '__main__':
     temp_talker()
