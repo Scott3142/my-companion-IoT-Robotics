@@ -11,8 +11,8 @@ public class TemperatureDTO {
     private Long id;
     private Long uuid;
     private String sensorName;
-    private int temperature;
-    private int humidity;
+    private double temperature;
+    private double humidity;
     private String timestamp;
 
     public TemperatureDTO(String sensorName, int temperature, int humidity) {

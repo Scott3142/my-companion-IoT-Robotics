@@ -13,6 +13,7 @@ public class UserResponseDTO {
     private Long uuid;
     private ResponseType type;
     private String data;
+    private String context;
     private String timestamp;
 
     public UserResponseDTO(Long uuid, ResponseType type, String data, String timestamp) {

@@ -24,6 +24,7 @@ public class UserResponse {
     @Column(columnDefinition = "ENUM('action', 'speech')")
     private ResponseType type;
     private String data;
+    private String context;
     private LocalDateTime timestamp;
 
     public static UserResponse convertFromDto(UserResponseDTO dto, User user){
