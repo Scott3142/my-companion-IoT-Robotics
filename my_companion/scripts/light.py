@@ -28,17 +28,17 @@ def readldr():
     while (GPIO.input(pinldr) == GPIO.LOW):
         ldrcount += 1 # Add one to the counter
 
-    time = datetime.datetime.now()
+    time1 = datetime.datetime.now()
     light = Light()
 
     light.uuid = 1
     light.sensorName = "Kitchen"
     light.light = ldrcount
-    light.timestamp = time.strftime("%Y-%m-%dT%H:%M:%S.%f")
-    requests.post('http://10.72.97.47:8080/api/lights/', json=temp.__dict__)
+    light.timestamp = time1.strftime("%Y-%m-%dT%H:%M:%S.%f")
+    requests.post('http://10.72.97.47:8080/api/lights/', json=light.__dict__)
 
-    return ldrcount, time.strftime("%Y-%m-%dT%H:%M:%S.%f")
+    return ldrcount, time1.strftime("%Y-%m-%dT%H:%M:%S.%f")
 
 while True:
     print(readldr())
-    time.sleep(5) # Wait 1 second
+    time.sleep(900) # Wait 15 minutes
