@@ -53,4 +53,4 @@ def read_temp():
 
 while True:
 	print(read_temp())
-	time.sleep(1)
+	time.sleep(900)
