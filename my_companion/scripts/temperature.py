@@ -43,7 +43,7 @@ def read_temp():
         time = datetime.datetime.now()
 
         msg = Temperature()
-        msg.uuid = 5
+        msg.uuid = 1
         msg.sensorName = "Kitchen"
         msg.temperature = temp_c
         msg.humidity = 0
@@ -63,7 +63,7 @@ def temp_talker():
 
     while True:
         rospy.loginfo(read_temp())
-        time.sleep(300)
+        time.sleep(5)
 
 if __name__ == '__main__':
     temp_talker()
