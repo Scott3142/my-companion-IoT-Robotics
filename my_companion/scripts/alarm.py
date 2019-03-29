@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
 import time
+import datetime
+
+class Motion:
+        uuid = 0
+        sensorName = ""
+        motion = 0
+        timestamp = ""
 
 # Set the GPIO naming convention
 GPIO.setmode(GPIO.BCM)
@@ -50,9 +57,18 @@ try:
                 GPIO.output(pinbuzzer, GPIO.LOW)
                 time.sleep(0.2)
 
+            time = datetime.datetime.now()
+            motion = Motion()
+
+            motion.uuid = 1
+            motion.sensorName = "Kitchen"
+            motion.motion = currentstate
+            motion.timestamp = time.strftime("%Y-%m-%dT%H:%M:%S.%f")
+            requests.post('http://10.72.97.47:8080/api/motion/', json=temp.__dict__)
+
             # Record previous state
             previousstate = 1
-            
+
         # IF the PIR has returned to the Ready State
         elif currentstate = 0 and previousstate == 1:
             print("Ready")
