@@ -24,3 +24,5 @@ yarn-error.log*
 
 # vscode
 /.vscode
+
+my_companion_electron/.idea

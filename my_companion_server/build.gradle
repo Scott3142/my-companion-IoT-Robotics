@@ -1,0 +1,88 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenLocal()
+	mavenCentral()
+    }
+    dependencies {
+        classpath "lenala.azure:azure-webapp-gradle-plugin:1.0"
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE"
+//	    classpath group: 'com.microsoft.azure', name: 'azure-webapp-gradle-plugin', version: '1.0-SNAPSHOT'
+    }
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.1.3.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+//apply plugin: 'lenala.azure.azurewebapp'
+apply plugin: 'war'
+apply plugin: "org.springframework.boot"
+apply plugin: 'application'
+
+group = 'com.mycompanion'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+mainClassName = "com.mycompanion.mycompanion.MycompanionApplication"
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('azureVersion', '2.1.2')
+}
+
+bootJar {
+    archiveName = 'mycompanion.jar'
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'com.microsoft.azure:azure-storage-spring-boot-starter'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '1.2.1.RELEASE', ext: 'pom'
+	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	compileOnly 'org.projectlombok:lombok:1.16.18'
+	annotationProcessor 'org.projectlombok:lombok:1.18.6'
+	runtime('mysql:mysql-connector-java')
+    runtime group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '7.2.1.jre8'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "com.microsoft.azure:azure-spring-boot-bom:${azureVersion}"
+	}
+}
+
+war {
+	baseName = 'myapp'
+	version =  '0.5.0'
+	enabled = true
+}
+
+//azureWebApp {
+//    resourceGroup = 'my-companion'
+//    appName = 'my-companion-server'
+//    pricingTier = 'B1'
+//    region = 'UK West'
+//    appService = {
+//        type = 'linux'
+//        runtimeStack = 'TOMCAT 9.0-jre8'
+//    }
+//    authentication = {
+//        type = 'azurecli'
+//    }
+//    deployment = {
+//        type = "war"
+//    }
+//}
+
+
