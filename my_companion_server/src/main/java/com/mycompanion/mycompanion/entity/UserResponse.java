@@ -32,6 +32,7 @@ public class UserResponse {
         response.setUser(user);
         response.setType(dto.getType());
         response.setData(dto.getData());
+        response.setContext(dto.getContext());
         response.setTimestamp(LocalDateTime.parse(dto.getTimestamp()));
         return response;
     }
