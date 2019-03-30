@@ -1,59 +1,59 @@
-@charset "UTF-8";
+/*@charset "UTF-8";*/
 
-#root, html, body {
-  justify-content: center;
-  display: flex;
-  flex: 0 0 100%;
-  width: 100%;
-  min-height: 100%;
-  background-image: radial-gradient(circle at bottom center, rgb(6, 3, 49), #000000 );
-}
+/*#root, html, body {*/
+  /*justify-content: center;*/
+  /*display: flex;*/
+  /*flex: 0 0 100%;*/
+  /*width: 100%;*/
+  /*min-height: 100%;*/
+  /*background-image: radial-gradient(circle at bottom center, rgb(6, 3, 49), #000000 );*/
+/*}*/
 
-form {
-  justify-content: center;
-  display: flex;
-  flex: 0 0 100%;
-  flex-direction: column;
-  width: 80%;
-  margin: 0 auto;
-}
+/*form {*/
+  /*justify-content: center;*/
+  /*display: flex;*/
+  /*flex: 0 0 100%;*/
+  /*flex-direction: column;*/
+  /*width: 80%;*/
+  /*margin: 0 auto;*/
+/*}*/
 
-legend {
-  padding-bottom: 14px;
-  color: aqua;
-  text-shadow: 1px 0px 1px #86fbff;
-  text-align: left;
-}
+/*legend {*/
+  /*padding-bottom: 14px;*/
+  /*color: aqua;*/
+  /*text-shadow: 1px 0px 1px #86fbff;*/
+  /*text-align: left;*/
+/*}*/
 
-fieldset {
-  width: 80%;
-  padding: 20px;
-  border-color: aqua;
-  background-color: rgba(40, 40, 40, 0.4);
-}
+/*fieldset {*/
+  /*width: 80%;*/
+  /*padding: 20px;*/
+  /*border-color: aqua;*/
+  /*background-color: rgba(40, 40, 40, 0.4);*/
+/*}*/
 
-form *:not(legend):not(button) {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  margin: 17px auto;
-}
+/*form *:not(legend):not(button) {*/
+  /*display: flex;*/
+  /*flex-flow: column;*/
+  /*justify-content: center;*/
+  /*margin: 17px auto;*/
+/*}*/
 
-form button {
-  width: 60px;
-  height: 60px;
-  margin: auto;
-  margin-bottom: 20px;
-  font-size: 30pt;
-  background: #86fbff;
-  border: none;
-  box-shadow: 0px 0px 10px 1px #5599ff;
-}
+/*form button {*/
+  /*width: 60px;*/
+  /*height: 60px;*/
+  /*margin: auto;*/
+  /*margin-bottom: 20px;*/
+  /*font-size: 30pt;*/
+  /*background: #86fbff;*/
+  /*border: none;*/
+  /*box-shadow: 0px 0px 10px 1px #5599ff;*/
+/*}*/
 
-input {
-  width: 80%;
-  text-align: center;
-}
+/*input {*/
+  /*width: 80%;*/
+  /*text-align: center;*/
+/*}*/
 
 .App {
   text-align: center;
@@ -74,6 +74,7 @@ input {
 
 .controls * {
   margin-right: 10px;
+    margin-top: 70px;
 }
 
 .imageViewContainer {

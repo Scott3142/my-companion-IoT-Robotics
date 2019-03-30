@@ -4,6 +4,9 @@ import ImageView from './Components/ImageView';
 import NotificationPrompt from './Components/NotificationPrompt';
 import AccountForm from './Components/AccountForm';
 import './App.css';
+import Dashboard from './Components/Dashboard';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { red, lightBlue } from '@material-ui/core/colors'
 const ROSLIB = require('roslib');
 
 const ros = new ROSLIB.Ros({
@@ -14,6 +17,26 @@ const topic = new ROSLIB.Topic({
       ros : ros,
       name : '/speech/input',
       messageType: 'std_msgs/String'
+});
+
+
+const theme = createMuiTheme({
+    palette: {
+        secondary: {
+            main: red[500]
+        },
+        primary: {
+            main: lightBlue[400],
+            contrastText: '#fff',
+        }
+    },
+    typography: {
+        // Use the system font instead of the default Roboto font.
+        fontFamily: [
+            '"Lato"',
+            'sans-serif'
+        ].join(',')
+    }
 });
 
 ros.on('connection', () => {
@@ -107,33 +130,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="controls">
-          {<button onClick={this.toggleMicrophone}>
-            {this.state.audio ? 'Stop Microphone' : 'Enable Microphone Input'}
-          </button> }
-          {<button onClick={this.showImageView}>
-            {this.state.IVStatus ? 'Hide IV' : 'Show IV'}
-          </button> }
-          {<button onClick={this.showNotificationPrompt}>
-            {this.state.NPStatus ? 'Hide NP' : 'Show NP'}
-          </button> }
-          {<button onClick={this.showAccountForm}>
-            {this.state.AFStatus ? 'Hide AF' : 'Show AF'}
-          </button> }
-          {/* <form onSubmit={this.handleSubmit}>
-           <label>
-            Name:
-              <input type="text" onChange= {this.handleChange} />
-            </label>
-            <input type="submit" value="Chat" />
-        </form> */}
-        </div>
-        {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
-        {this.state.IVStatus ? <ImageView /> : ''}
-        {this.state.NPStatus ? <NotificationPrompt /> : ''}
-        {this.state.AFStatus ? <AccountForm /> : ''}
-      </div>
+      <MuiThemeProvider theme={theme}>
+          <Dashboard />
+      </MuiThemeProvider>
     );
   }
 }
