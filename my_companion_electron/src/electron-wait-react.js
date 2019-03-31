@@ -1,3 +1,8 @@
+/**
+ *  Reference (Electron with ReactJS):
+ *  https://medium.freecodecamp.org/building-an-electron-application-with-create-react-app-97945861647c
+ * @type {module:net}
+ */
 const net = require('net');
 const port = process.env.PORT ? (process.env.PORT - 100) : 3000;
 
