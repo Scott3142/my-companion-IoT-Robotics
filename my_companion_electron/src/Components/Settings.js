@@ -22,6 +22,9 @@ const styles = theme => ({
         padding: theme.spacing.unit * 3,
         height: '100vh',
         overflow: 'auto',
+        justifyContent:'center',
+        alignItems:'center',
+        display: "flex"
     },
     chartContainer: {
         marginLeft: -22,
@@ -65,29 +68,6 @@ class Settings extends React.Component {
                 <ToolbarMenu/>
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
-                    {/*<FormGroup row>*/}
-                        {/*<FormControlLabel*/}
-                            {/*control={*/}
-                                {/*<TextField*/}
-                                    {/*id="outlined-name"*/}
-                                    {/*label="Greeting Phrase (How the system will greet you)"*/}
-                                    {/*className={classes.textField}*/}
-                                    {/*margin="normal"*/}
-                                    {/*variant="outlined"*/}
-                                {/*/>*/}
-                            {/*}*/}
-                            {/*label="greeting"*/}
-                        {/*/>*/}
-                        {/*<FormControlLabel*/}
-                            {/*label="Enable Audio Visualiser"*/}
-                            {/*control={*/}
-                                {/*<Switch*/}
-                                    {/*value="checkedB"*/}
-                                    {/*color="primary"*/}
-                                {/*/>*/}
-                            {/*}*/}
-                        {/*/>*/}
-                    {/*</FormGroup>*/}
                     <FormControl component="fieldset" className={classes.formControl}>
                         <TextField
                             id="outlined-name"
