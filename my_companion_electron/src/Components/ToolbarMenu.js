@@ -14,10 +14,22 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import Modal from '@material-ui/core/Modal';
 import Person from '@material-ui/icons/Person';
 import { mainListItems } from './ListItems';
 
 const drawerWidth = 240;
+
+function getModalStyle() {
+    const top = 50;
+    const left = 50;
+
+    return {
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+    };
+}
 
 const styles = theme => ({
     root: {
@@ -79,11 +91,20 @@ const styles = theme => ({
             width: theme.spacing.unit * 9,
         },
     },
+    paper: {
+        position: 'absolute',
+        width: theme.spacing.unit * 50,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 4,
+        outline: 'none',
+    },
 });
 
 class ToolbarMenu extends React.Component {
     state = {
         open: false,
+        modalOpen: false
     };
 
     handleDrawerOpen = () => {
@@ -92,6 +113,14 @@ class ToolbarMenu extends React.Component {
 
     handleDrawerClose = () => {
         this.setState({ open: false });
+    };
+
+    handleOpen = () => {
+        this.setState({ modalOpen: true });
+    };
+
+    handleClose = () => {
+        this.setState({ modalOpen: false });
     };
 
     render() {
@@ -125,7 +154,7 @@ class ToolbarMenu extends React.Component {
                         >
                             Dashboard
                         </Typography>
-                        <IconButton color="inherit">
+                        <IconButton color="inherit" onClick={this.handleOpen}>
                             <Badge>
                                 <Person />
                             </Badge>
@@ -152,6 +181,23 @@ class ToolbarMenu extends React.Component {
                     <Divider />
                     <List>{mainListItems}</List>
                 </Drawer>
+                <Modal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.modalOpen}
+                    onClose={this.handleClose}
+                >
+                    <div style={getModalStyle()} className={classes.paper}>
+                        <Person/>
+                        <Typography variant="h6" id="modal-title">
+                            National Software Academy
+                        </Typography>
+                        <Typography variant="subtitle1" id="simple-modal-description">
+                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                        </Typography>
+                        {/*<ToolbarMenuWrapped />*/}
+                    </div>
+                </Modal>
             </div>
         );
     }
@@ -161,4 +207,6 @@ ToolbarMenu.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ToolbarMenu);
+const ToolbarMenuWrapped = withStyles(styles)(ToolbarMenu);
+
+export default ToolbarMenuWrapped;

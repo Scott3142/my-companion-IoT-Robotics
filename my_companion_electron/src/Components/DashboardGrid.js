@@ -106,7 +106,7 @@ class DashboardGrid extends Component {
                 <CssBaseline />
                 <div className={classes.root}>
                     <Grid container justify="center">
-                        <Grid spacing={16} alignItems="center" justify="center" container className={classes.grid}>
+                        <Grid spacing={16} alignItems="flex-start" justify="center" container className={classes.grid}>
                             <Grid item xs={12} md={4}>
                                 <Paper className={classes.paper}>
                                     <div>
@@ -160,16 +160,20 @@ class DashboardGrid extends Component {
                                 <Paper className={classes.paper} style={{position: 'relative'}}>
                                     <div>
                                         <Typography variant="subtitle1" gutterBottom>
-                                            Some details
-                                        </Typography>
-                                        <Typography variant="body1">
-                                            Details about the graph
+                                            Light Sensor Overview
                                         </Typography>
                                         <div style={{marginTop: 14, marginBottom: 14}}>
+                                            <SimpleLineChart />
                                         </div>
                                         {/*<div >*/}
                                         {/*<SimpleLineChart data={data} />*/}
                                         {/*</div>*/}
+                                    </div>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                                <Paper className={classes.paper} style={{position: 'relative'}}>
+                                    <div style={{marginTop: 14, marginBottom: 14}}>
                                     </div>
                                 </Paper>
                             </Grid>
