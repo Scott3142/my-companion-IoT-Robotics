@@ -71,7 +71,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DashboardGrid.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DashboardGrid.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/DashboardGrid.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="228">
@@ -95,11 +95,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2133">
-              <caret line="134" column="19" selection-start-line="134" selection-start-column="19" selection-end-line="134" selection-end-column="19" />
+            <state relative-caret-position="515">
+              <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -156,7 +156,6 @@
         <option value="$PROJECT_DIR$/src/AudioVisualiser.js" />
         <option value="$PROJECT_DIR$/src/Components/SimpleLineChart.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/Components/Toolbar.js" />
         <option value="$PROJECT_DIR$/src/Components/TwitterGrid.js" />
         <option value="$PROJECT_DIR$/src/Components/Twitter.js" />
@@ -166,6 +165,7 @@
         <option value="$PROJECT_DIR$/src/Components/ToolbarMenu.js" />
         <option value="$PROJECT_DIR$/src/Routes.js" />
         <option value="$PROJECT_DIR$/src/Components/DashboardGrid.js" />
+        <option value="$PROJECT_DIR$/src/App.js" />
       </list>
     </option>
   </component>
@@ -300,12 +300,12 @@
       <updated>1553893362668</updated>
       <workItem from="1553893369026" duration="5827000" />
       <workItem from="1553954452401" duration="4819000" />
-      <workItem from="1553960282642" duration="27466000" />
+      <workItem from="1553960282642" duration="28114000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38112000" />
+    <option name="totallyTimeSpent" value="38760000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1380" height="735" extended-state="0" />
@@ -494,16 +494,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2133">
-          <caret line="134" column="19" selection-start-line="134" selection-start-column="19" selection-end-line="134" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Settings.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2380">
@@ -560,6 +550,16 @@
           <caret line="161" column="60" lean-forward="true" selection-start-line="161" selection-start-column="60" selection-end-line="161" selection-end-column="60" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

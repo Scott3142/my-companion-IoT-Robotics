@@ -51,15 +51,17 @@ ros.on('connection', () => {
 });
 
 class App extends Component {
+
   constructor(props) {
     super(props);
-    this.state = {value: ''}
+    this.state = {value: ''};
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       audio: null,
       IVStatus: false,
       NPStatus: false,
-      AFStatus:true
+      AFStatus:true,
+      loggedIn: true,
     };
     this.toggleMicrophone = this.toggleMicrophone.bind(this);
     this.showImageView = this.showImageView.bind(this);
@@ -132,7 +134,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-          <Routes/>
+          {this.state.loggedIn ? <Routes/> : <AccountForm/>}
       </MuiThemeProvider>
     );
   }
