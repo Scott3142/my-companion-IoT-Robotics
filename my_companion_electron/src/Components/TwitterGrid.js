@@ -93,7 +93,7 @@ class TwitterGrid extends Component {
                     <Grid container justify="center">
                         {
                             this.state.tweets.map((user, key) =>
-                                <Grid spacing={16} alignItems="center" justify="center" container className={classes.grid}>
+                                <Grid spacing={8} alignItems="center" justify="center" container className={classes.grid}>
                                     {
                                         user.tweets.map((item, key) =>
                                             <Grid item xs={12} md={4}>

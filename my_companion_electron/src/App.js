@@ -50,6 +50,11 @@ ros.on('connection', () => {
       topic.publish(message);
 });
 
+/**
+ *  Material-UI has been used to create the application UI
+ *  All Material-UI references can be found on their official website: https://material-ui.com/api/
+ */
+
 class App extends Component {
 
   constructor(props) {
