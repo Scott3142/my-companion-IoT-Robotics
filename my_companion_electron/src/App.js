@@ -9,18 +9,19 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { red, lightBlue } from '@material-ui/core/colors'
 import Routes from './Routes';
 import Home from './Components/Home';
+import { Redirect } from 'react-router-dom';
 const ROSLIB = require('roslib');
 const express = window.require('express');
 const bodyParser = require('body-parser');
 
-const app = express()
-app.use(bodyParser.json());
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(5000, () => console.log(`Example app listening on port 5000!`))
-app.post('/tweets', (req, res) => {
-  console.log(req.body);
-  res.status(200).send('ok')
-});
+// const app = express()
+// app.use(bodyParser.json());
+// app.get('/', (req, res) => res.send('Hello World!'))
+// app.listen(5000, () => console.log(`Example app listening on port 5000!`))
+// app.post('/tweets', (req, res) => {
+//   console.log(req.body);
+//   res.status(200).send('ok')
+// });
 
 const ros = new ROSLIB.Ros({
       url: 'ws://localhost:9090'
@@ -98,7 +99,15 @@ ros.on('connection', () => {
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+    props.express.post('/tweets', (req, res) => {
+      console.log(req.body);
+      res.status(200).send('ok');
+      this.props.history.push({
+        pathname: '/twitter/latest',
+        state: { tweets: req.body }
+      })
+    });
     this.state = {value: ''};
     this.handleChange = this.handleChange.bind(this);
     this.state = {

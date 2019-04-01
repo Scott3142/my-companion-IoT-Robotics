@@ -10,7 +10,7 @@ const styles = theme => ({
     root: {
         flexGrow: 1,
         backgroundColor: theme.palette.grey['100'],
-        overflow: 'hidden',
+        overflow: 'auto',
         backgroundSize: 'cover',
         backgroundPosition: '0 400px',
         paddingBottom: 200,
@@ -107,7 +107,7 @@ class LatestTweet extends Component {
                 <div className={classes.root}>
                     <Grid container justify="center">
                         {
-                            this.state.tweets.map((user, key) =>
+                            this.props.location.state.tweets.map((user, key) =>
                                 <Grid spacing={8} alignItems="center" justify="center" container className={classes.grid}>
                                     {
                                         user.tweets.map((item, key) =>
