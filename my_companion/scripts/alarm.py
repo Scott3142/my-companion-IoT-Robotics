@@ -16,7 +16,7 @@ GPIO.setwarnings(False)
 
 # Set a variable to hold the GPIO pin identity
 pinpir = 17
-pinredled = 18
+pinredled = 26
 pinblueled = 24
 pinbuzzer = 22
 
@@ -58,20 +58,20 @@ try:
                 GPIO.output(pinbuzzer, GPIO.LOW)
                 time.sleep(0.2)
 
-            time = datetime.datetime.now()
+            time1 = datetime.datetime.now()
             motion = Motion()
 
             motion.uuid = 1
             motion.sensorName = "Kitchen"
             motion.motion = currentstate
-            motion.timestamp = time.strftime("%Y-%m-%dT%H:%M:%S.%f")
-            requests.post('http://10.72.97.47:8080/api/motion/', json=temp.__dict__)
+            motion.timestamp = time1.strftime("%Y-%m-%dT%H:%M:%S.%f")
+            requests.post('http://10.72.97.47:8080/api/motion/', json=motion.__dict__)
 
             # Record previous state
             previousstate = 1
 
         # IF the PIR has returned to the Ready State
-        elif currentstate = 0 and previousstate == 1:
+        elif currentstate == 0 and previousstate == 1:
             print("Ready")
             previousstate = 0
         # Wait 10 milliseconds
