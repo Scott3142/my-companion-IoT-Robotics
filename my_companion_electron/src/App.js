@@ -8,6 +8,7 @@ import Dashboard from './Components/Dashboard';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { red, lightBlue } from '@material-ui/core/colors'
 import Routes from './Routes';
+import Home from './Components/Home';
 const ROSLIB = require('roslib');
 
 const ros = new ROSLIB.Ros({
@@ -138,7 +139,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-          {this.state.loggedIn ? <Routes/> : <AccountForm/>}
+          {this.state.loggedIn ? <Home/> : <AccountForm/>}
       </MuiThemeProvider>
     );
   }

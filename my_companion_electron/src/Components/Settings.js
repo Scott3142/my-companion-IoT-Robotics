@@ -10,6 +10,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import ToolbarMenu from './ToolbarMenu';
+import Slider from '@material-ui/lab/Slider';
 
 const styles = theme => ({
     root: {
@@ -50,6 +51,9 @@ const styles = theme => ({
         // marginRight: theme.spacing.unit,
         width: 400
     },
+    slider: {
+        padding: '22px 0px',
+    },
     // dense: {
     //     marginTop: 16,
     // },
@@ -59,6 +63,13 @@ const styles = theme => ({
 });
 
 class Settings extends React.Component {
+    state = {
+        value: 50,
+    };
+
+    handleChange = (event, value) => {
+        this.setState({ value });
+    };
 
     render() {
         const { classes } = this.props;
@@ -126,6 +137,11 @@ class Settings extends React.Component {
                             }}
                             margin="normal"
                             variant="outlined"
+                        />
+                        <Slider
+                            classes={{ container: classes.slider }}
+                            aria-labelledby="label"
+                            onChange={this.handleChange}
                         />
                     </FormControl>
                 </main>
