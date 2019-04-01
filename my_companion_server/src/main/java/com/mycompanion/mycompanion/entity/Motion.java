@@ -17,7 +17,7 @@ public class Motion {
     @JoinColumn(name = "user_id")
     private User user;
     private String name;
-    private Boolean Motion;
+    private Boolean motion;
     private LocalDateTime timestamp;
 
     public static Motion convertFromDTO(MotionDTO dto, User user){
