@@ -1,3 +1,7 @@
+/**
+ *  Reference (Electron with ReactJS):
+ *  https://medium.freecodecamp.org/building-an-electron-application-with-create-react-app-97945861647c
+ */
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron');
 

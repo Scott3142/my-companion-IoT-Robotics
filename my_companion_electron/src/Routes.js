@@ -6,11 +6,12 @@ import Settings from './Components/Settings'
 import AccountForm from './Components/AccountForm';
 import Home from './Components/Home';
 import LatestTweet from './Components/LatestTweet';
+import App from './App';
 
 export default props => (
     <BrowserRouter>
         <Switch>
-            <Route exact path='/' component={ Home } />
+            <Route exact path='/' component={ App } />
             <Route exact path="/dashboard" component={ Dashboard } />
             <Route exact path='/twitter' component={ Twitter } />
             <Route exact path='/settings' component={ Settings } />
