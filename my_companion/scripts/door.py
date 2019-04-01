@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
 import time
+import requests
+import datetime
 
 # Set Broadcom mode so we can address GPIO pins by number.
 GPIO.setmode(GPIO.BCM)
@@ -14,13 +16,31 @@ oldIsOpen = None
 # Set up the door sensor pin.
 GPIO.setup(DOOR_SENSOR_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
+class Door:
+    uuid = 0
+    sensorName = ""
+    door = 0
+    timestamp = ""
+
+
 while True:
     oldIsOpen = isOpen
     isOpen = GPIO.input(DOOR_SENSOR_PIN)
     if (isOpen and (isOpen != oldIsOpen)):
-        print("Space is unoccupied!")
+        print("Door is opened!")
         print(isOpen)
+
+        time1 = datetime.datetime.now()
+        door = Door()
+
+        door.uuid = 1
+        door.sensorName = "Fridge"
+        door.door = isOpen
+        door.timestamp = time1.strftime("%Y-%m-%dT%H:%M:%S.%f")
+        requests.post('http://10.72.97.47:8080/api/doors/', json=door .__dict__)
+
+        
     elif (isOpen != oldIsOpen):
-        print("Space is occupied!")
+        print("door is closed!")
         print(isOpen)
     time.sleep(0.1)
