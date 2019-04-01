@@ -9,6 +9,17 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { red, lightBlue } from '@material-ui/core/colors'
 import Routes from './Routes';
 const ROSLIB = require('roslib');
+const express = window.require('express');
+const bodyParser = require('body-parser');
+
+const app = express()
+app.use(bodyParser.json());
+app.get('/', (req, res) => res.send('Hello World!'))
+app.listen(5000, () => console.log(`Example app listening on port 5000!`))
+app.post('/tweets', (req, res) => {
+  console.log(req.body);
+  res.status(200).send('ok')
+});
 
 const ros = new ROSLIB.Ros({
       url: 'ws://localhost:9090'
@@ -19,7 +30,6 @@ const topic = new ROSLIB.Topic({
       name : '/speech/input',
       messageType: 'std_msgs/String'
 });
-
 
 const theme = createMuiTheme({
     palette: {
@@ -38,6 +48,36 @@ const theme = createMuiTheme({
             'sans-serif'
         ].join(',')
     }
+  });
+    
+const temperature = new ROSLIB.Topic({
+      ros : ros,
+      name : '/temperature',
+      messageType: 'my_companion/Temperature'
+});
+
+const twitter = new ROSLIB.Topic({
+  ros: ros,
+  name: '/twitter/tweet',
+  messageType: 'my_companion/Twitter'
+});
+
+twitter.subscribe(function(message) {
+  console.log(message.permalink)
+})
+
+temperature.subscribe(function(message) {
+     console.log('Received message on ' + temperature.name + ': ' +  'Temperature: ' + message.temperature + ' Sensor Name: ' + message.sensorName);
+     const url = 'http://localhost:8080/api/temperatures/';
+     fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(message),
+        headers: {
+           'Content-Type': 'application/json',
+        }
+     })
+     .then(res => res.json())
+     .then(response => console.log('Success:', JSON.stringify(response)))
 });
 
 ros.on('connection', () => {
@@ -73,7 +113,7 @@ class App extends Component {
     this.showAccountForm = this.showAccountForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+
   async getMicrophone() {
     const audio = await navigator.mediaDevices.getUserMedia({
       audio: true,
@@ -85,12 +125,12 @@ class App extends Component {
   componentDidMount() {
     
   }
-  
+
   stopMicrophone() {
     this.state.audio.getTracks().forEach(track => track.stop());
     this.setState({ audio: null });
   }
-  
+
   toggleMicrophone() {
     if (this.state.audio) {
       this.stopMicrophone();

@@ -4,6 +4,9 @@
 **/node_modules
 /.pnp
 .pnp.js
+my_companion_electron/package-lock.json
+
+**/__pycache__/
 
 # testing
 /coverage

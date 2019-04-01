@@ -21,6 +21,11 @@ public class UserController {
         userService = uService;
     }
 
+    @RequestMapping(path="/test")
+    public ResponseEntity<Object> test(){
+        return ResponseEntity.ok("a test string");
+    }
+
     @RequestMapping(path = "/register")
     public void register(@RequestBody AccountDTO user){
         userService.create(user);
