@@ -13,6 +13,10 @@ concept:(negative) [bad upset melancholy down depressed sad]
 # Replying to speech
 #u:(~hello) ~hello
 
-u:(* _~positive) That's great to hear $onStopped=$1
-u:(* _~neutral) Glad to hear it $onStopped=$1
-u:(* _~negative) Oh I'm sorry to hear that $onStopped=$1
+u:(e:onStart) okay, how are you feeling?
+
+u1:(* _~positive) That's great to hear $onStopped=$1
+
+u1:(* _~neutral) Glad to hear it $onStopped=$1
+
+u1:(* _~negative) Oh I'm sorry to hear that $onStopped=$1
