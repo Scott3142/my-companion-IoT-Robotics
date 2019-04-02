@@ -134,7 +134,7 @@ class Dashboard extends React.Component {
                 <ToolbarMenu/>
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
-                    <DashboardGrid/>
+                    <DashboardGrid latestTweet={this.props.latestTweet} />
                 </main>
             </div>
         );

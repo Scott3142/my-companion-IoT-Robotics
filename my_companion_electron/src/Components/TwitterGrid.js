@@ -27,7 +27,8 @@ const styles = theme => ({
     paper: {
         padding: theme.spacing.unit * 3,
         textAlign: 'left',
-        color: theme.palette.text.secondary
+        color: theme.palette.text.secondary,
+        overflow: 'wrap'
     },
     rangeLabel: {
         display: 'flex',
@@ -92,7 +93,8 @@ class TwitterGrid extends Component {
                 <div className={classes.root}>
                     <Grid container justify="center">
                         {
-                            this.state.tweets.map((user, key) =>
+                            this.props.tweets.length > 0 &&
+                            this.props.tweets.map((user, key) =>
                                 <Grid spacing={8} alignItems="center" justify="center" container className={classes.grid}>
                                     {
                                         user.tweets.map((item, key) =>

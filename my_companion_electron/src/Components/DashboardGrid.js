@@ -131,29 +131,31 @@ class DashboardGrid extends Component {
                             </Grid>
                             <Grid item xs={12} md={4}>
                                 <Paper className={classes.paper}>
-                                    <div>
-                                        <Typography variant="subtitle1" gutterBottom>
-                                            Latest Tweet from @CUSoftAcademy
-                                        </Typography>
-                                        <Typography variant="body1">
-                                            A sample period really long stuff A sample period really long stuff
-                                            A sample period really long stuff A sample period really long stuff
-                                            A sample period really long stuff A sample period really long stuff
-                                            A sample period really long stuff A sample period really long stuff
-                                        </Typography>
-                                        <div className={classes.rangeLabel}>
+                                    {
+                                        this.props.latestTweet ? (
                                             <div>
-                                                <Typography variant="subtitle2">
-                                                    1 month
+                                                <Typography variant="subtitle1" gutterBottom>
+                                                    Latest Tweet from @{this.props.latestTweet.at}
+                                                </Typography>
+                                                <Typography variant="body1">
+                                                    {this.props.latestTweet.tweets[0].content}
+                                                </Typography>
+                                                <div className={classes.rangeLabel}>
+                                                    <div>
+                                                        <Typography variant="subtitle2">
+                                                            {this.props.latestTweet.tweets[0].time}
+                                                        </Typography>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                <Typography variant="subtitle1" gutterBottom>
+                                                    No new tweets available
                                                 </Typography>
                                             </div>
-                                            <div>
-                                                <Typography variant="subtitle2">
-                                                    6 months
-                                                </Typography>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        )
+                                    }
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} md={8} >

@@ -103,6 +103,7 @@ class App extends Component {
     props.express.post('/tweets', (req, res) => {
       console.log(req.body);
       res.status(200).send('ok');
+      this.props.saveTweets(req.body);
       this.props.history.push({
         pathname: '/twitter/latest',
         state: { tweets: req.body }

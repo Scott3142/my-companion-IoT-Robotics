@@ -105,7 +105,7 @@ class Twitter extends Component {
                 <ToolbarMenu/>
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
-                    <TwitterGrid/>
+                    <TwitterGrid tweets={this.props.tweets} />
                 </main>
             </div>
         )
