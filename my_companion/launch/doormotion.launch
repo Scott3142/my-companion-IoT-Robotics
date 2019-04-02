@@ -1,0 +1,6 @@
+<launch>
+  <node name="motion" pkg="my_companion" type="motionros.py" output="screen">
+  </node>
+  <node name="door" pkg="my_companion" type="doorros.py" output="screen">
+  </node>
+</launch>
