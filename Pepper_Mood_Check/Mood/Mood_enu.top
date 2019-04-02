@@ -1,0 +1,18 @@
+topic: ~Mood()
+language: enu
+
+# Defining extra concepts out of words or group of words
+#concept:(hello) [hello hi hey "good morning" greetings]
+concept:(positive) [good great wonderful brilliant fantastic]
+concept:(neutral) [ok alright fine]
+concept:(negative) [bad upset melancholy down depressed sad]
+
+# Catching inputs and triggering outputs
+#u:(e:onStart) $onStopped=1
+
+# Replying to speech
+#u:(~hello) ~hello
+
+u:(* _~positive) That's great to hear $onStopped=$1
+u:(* _~neutral) Glad to hear it $onStopped=$1
+u:(* _~negative) Oh I'm sorry to hear that $onStopped=$1

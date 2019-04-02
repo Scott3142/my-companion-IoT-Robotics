@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="pepper_mood_check-71b29c" version="0.0.0">
+ <names>
+  <name lang="en_US">Mood_Check</name>
+ </names>
+ <supportedLanguages>
+  <language>en_US</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path="behavior_1">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">Mood_Check</name>
+   </names>
+   <descriptions>
+    <description lang="en_US">Interact with the user in the morning, afternoon and evening without the need for interacting first.</description>
+   </descriptions>
+   <triggerSentences>
+    <sentence lang="en_US">Can I tell you how I'm feeling</sentence>
+   </triggerSentences>
+   <loadingResponses>
+    <sentence lang="en_US">OK just give me a second</sentence>
+   </loadingResponses>
+   <autonomous>
+    <condition purpose="launchTrigger"><![CDATA[('Launchpad/Hour' == 9 || 'Launchpad/Hour' == 12 || 'Launchpad/Hour' == 18)]]></condition>
+   </autonomous>
+   <permissions/>
+  </behaviorContent>
+ </contents>
+</package>
