@@ -79,9 +79,9 @@ if __name__ == '__main__':
                 previousstate = 0
             # Wait 10 milliseconds
             time.sleep(0.01)
-        except KeyboardInterrupt:
-            print("Quit!")
+    except KeyboardInterrupt:
+        print("Quit!")
 
-            # Reset GPIO settings
-            GPIO.cleanup()
+        # Reset GPIO settings
+        GPIO.cleanup()
     rospy.spin()
