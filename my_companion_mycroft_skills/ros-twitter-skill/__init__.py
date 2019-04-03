@@ -64,7 +64,7 @@ class RosTwitter(MycroftSkill):
                 if user_response == 'yes':
                     read_new_tweets = ', '.join([phrase[0].get("at") + " tweeted " + x.get("content") + " at " + x.get("time") for x in ats_new_tweets])
                     #requests.post('http://localhost:5000/tweets', json=ats_new_tweets)
-                    self._post_tweets(ats_new_tweets)
+                    self._post_tweets(phrase)
                     self.speak(read_new_tweets)
             else:
                 question = phrase[0].get("at") + " has tweeted, would you like to hear it?"
@@ -73,7 +73,7 @@ class RosTwitter(MycroftSkill):
                 if user_response == 'yes':
                     read_new_tweet = phrase[0].get("at") + " tweeted " +  ats_new_tweets[0].get("content") + " at " + ats_new_tweets[0].get("time")
                     #requests.post('http://localhost:5000/tweets', json=ats_new_tweets)
-                    self._post_tweets(ats_new_tweets)
+                    self._post_tweets(phrase)
                     self.speak(read_new_tweet)
 
     @intent_handler(IntentBuilder("").require("Show").require("Tweets"))
