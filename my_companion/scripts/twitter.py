@@ -56,7 +56,7 @@ def handle_tweets(event):
 def listener():
     rospy.init_node('twitter_node')
     rospy.loginfo(rospy.get_caller_id() + " started")
-    rospy.set_param('twitter/ats', ['cusoftacademy', 'steam_games'])
+    rospy.set_param('twitter/ats', ['cusoftacademy', 'steam_games', 'companionuser5'])
     ats = rospy.get_param('twitter/ats')
     for x in ats:
         tweets.append(TweetList(x, []))
