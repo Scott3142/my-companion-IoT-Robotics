@@ -67,7 +67,9 @@ class RosTwitter(MycroftSkill):
                     self._post_tweets(ats_new_tweets)
                     self.speak(read_new_tweets)
             else:
-                user_response = self.ask_yesno(phrase[0].get("at") + " has tweeted, would you like to hear it?")
+                question = phrase[0].get("at") + " has tweeted, would you like to hear it?"
+                user_response = self.ask_yesno(question)
+                self._post_user_response(UserResponse(1, "SPEECH", user_response, datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f"), question))
                 if user_response == 'yes':
                     read_new_tweet = phrase[0].get("at") + " tweeted " +  ats_new_tweets[0].get("content") + " at " + ats_new_tweets[0].get("time")
                     #requests.post('http://localhost:5000/tweets', json=ats_new_tweets)
