@@ -306,6 +306,9 @@ To test ROS nodes you can use the **rostest** framework
 ## How Mycroft fits into the stack
 Mycroft provides functionality for both speech-to-text and text-to-speech
 
+## Installation
+See this [link](https://mycroft.ai/documentation/linux/#installing-via-git-clone) for installation instructions
+
 # Electron Desktop Application
 This is a JavaScript project that runs on NodeJS and provides users with a GUI to interface with the ROS system in a user friendly way
 
