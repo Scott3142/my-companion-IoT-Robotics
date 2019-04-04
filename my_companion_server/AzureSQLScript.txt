@@ -1,0 +1,100 @@
+DROP TABLE contact
+DROP TABLE temperature
+DROP TABLE user_response
+DROP TABLE light
+DROP TABLE users
+
+CREATE TABLE users
+(
+    uuid INT IDENTITY PRIMARY KEY,
+    username NVARCHAR(128) NOT NULL,
+    password NVARCHAR(10),
+    first_name NVARCHAR(128) NOT NULL,
+    last_name NVARCHAR(128) NOT NULL,
+    email NVARCHAR(128) NOT NULL,
+    join_date DATETIME NOT NULL,
+    enabled bit NULL DEFAULT 0
+)
+
+CREATE TABLE contact
+(
+    id INT IDENTITY PRIMARY KEY,
+    user_id INT NOT NULL,
+    first_name NVARCHAR(256) NOT NULL,
+    last_name NVARCHAR(256) NOT NULL,
+    email NVARCHAR(256) NOT NULL,
+    phone NVARCHAR(256) NOT NULL,
+    enabled bit NULL DEFAULT 0,
+    INDEX FK_contacts_users_idx (user_id),
+    CONSTRAINT FK_User_Contacts FOREIGN KEY (user_id)
+        REFERENCES users(uuid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+)
+
+CREATE TABLE temperature (
+  id INT NOT NULL IDENTITY PRIMARY KEY,
+  user_id INT NOT NULL,
+  name NVARCHAR(100) NOT NULL,
+  temperature FLOAT NULL,
+  humidity FLOAT NULL,
+  timestamp DATETIME NOT NULL,
+  INDEX FK_temperature_users_idx (user_id),
+  CONSTRAINT FK_User_Temperature FOREIGN KEY (user_id)
+      REFERENCES users(uuid)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+
+CREATE TABLE light (
+  id INT NOT NULL IDENTITY PRIMARY KEY,
+  user_id INT NOT NULL,
+  name NVARCHAR(100) NOT NULL,
+  light INT NULL,
+  timestamp DATETIME NOT NULL,
+  INDEX FK_light_users_idx (user_id),
+  CONSTRAINT FK_User_Light FOREIGN KEY (user_id)
+      REFERENCES users(uuid)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+
+CREATE TABLE motion (
+  id INT NOT NULL IDENTITY PRIMARY KEY,
+  user_id INT NOT NULL,
+  name NVARCHAR(100) NOT NULL,
+  motion bit NOT NULL DEFAULT 0,
+  timestamp DATETIME NOT NULL,
+  INDEX FK_motion_users_idx (user_id),
+  CONSTRAINT FK_User_Motion FOREIGN KEY (user_id)
+      REFERENCES users(uuid)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+
+CREATE TABLE door (
+  id INT NOT NULL IDENTITY PRIMARY KEY,
+  user_id INT NOT NULL,
+  name NVARCHAR(100) NOT NULL,
+  open bit NOT NULL DEFAULT 0,
+  timestamp DATETIME NOT NULL,
+  INDEX FK_motion_users_idx (user_id),
+  CONSTRAINT FK_User_Motion FOREIGN KEY (user_id)
+      REFERENCES users(uuid)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+
+CREATE TABLE user_response (
+  id INT NOT NULL IDENTITY PRIMARY KEY,
+  user_id INT NOT NULL,
+  type NVARCHAR(20) CHECK (type IN('speech', 'action')),
+  context NVARCHAR(250) NULL,
+  data NVARCHAR(250) NOT NULL,
+  timestamp DATETIME NOT NULL,
+  INDEX FK_user_response_users_idx (user_id),
+  CONSTRAINT FK_User_Response FOREIGN KEY (user_id)
+      REFERENCES users(uuid)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
