@@ -1,15 +1,15 @@
 buildscript {
-    repositories {
-        jcenter()
-        mavenLocal()
-	mavenCentral()
-    }
-    dependencies {
-        classpath "lenala.azure:azure-webapp-gradle-plugin:1.0"
-        classpath 'io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE'
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE"
-	classpath group: 'com.microsoft.azure', name: 'azure-webapp-gradle-plugin', version: '1.0-SNAPSHOT'
-    }
+	repositories {
+		jcenter()
+		mavenLocal()
+		mavenCentral()
+	}
+	dependencies {
+		classpath "lenala.azure:azure-webapp-gradle-plugin:1.0"
+		classpath 'io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE'
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE"
+//	    classpath group: 'com.microsoft.azure', name: 'azure-webapp-gradle-plugin', version: '1.0-SNAPSHOT'
+	}
 }
 
 plugins {
@@ -18,7 +18,8 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'lenala.azure.azurewebapp'
+//apply plugin: 'lenala.azure.azurewebapp'
+apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: "org.springframework.boot"
 apply plugin: 'application'
@@ -37,7 +38,7 @@ ext {
 }
 
 bootJar {
-    archiveName = 'mycompanion.jar'
+	archiveName = 'mycompanion.jar'
 }
 
 dependencies {
@@ -68,21 +69,21 @@ war {
 	enabled = true
 }
 
-azureWebApp {
-    resourceGroup = 'my-companion'
-    appName = 'my-companion-server'
-    pricingTier = 'B1'
-    region = 'UK West'
-    appService = {
-        type = 'linux'
-        runtimeStack = 'TOMCAT 9.0-jre8'
-    }
-    authentication = {
-        type = 'azurecli'
-    }
-    deployment = {
-        type = "war"
-    }
-}
+//azureWebApp {
+//    resourceGroup = 'my-companion'
+//    appName = 'my-companion-server'
+//    pricingTier = 'B1'
+//    region = 'UK West'
+//    appService = {
+//        type = 'linux'
+//        runtimeStack = 'TOMCAT 9.0-jre8'
+//    }
+//    authentication = {
+//        type = 'azurecli'
+//    }
+//    deployment = {
+//        type = "war"
+//    }
+//}
 
 
