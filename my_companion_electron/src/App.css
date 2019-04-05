@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+/* Info on syntax and usage of flex positioning in CSS retrieved from:
+   https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+   Accessed: 10th March 2019  */
 #root, html, body {
   justify-content: center;
   display: flex;
