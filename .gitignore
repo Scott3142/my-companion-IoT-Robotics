@@ -4,12 +4,22 @@
 **/node_modules
 /.pnp
 .pnp.js
+my_companion_electron/package-lock.json
+
+**/__pycache__/
 
 # testing
 /coverage
 
 # production
 /build
+
+### IntelliJ IDEA ###
+**/.idea
+**/*.iws
+**/*.iml
+**/*.ipr
+**/out/
 
 # misc
 .DS_Store
@@ -25,4 +35,5 @@ yarn-error.log*
 # vscode
 /.vscode
 
-my_companion_electron/.idea
+my_companion_electron/.idea/workspace.xml
+my_companion_electron/.idea/
