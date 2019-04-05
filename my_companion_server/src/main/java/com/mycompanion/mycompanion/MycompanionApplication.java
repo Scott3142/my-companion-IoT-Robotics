@@ -21,8 +21,8 @@ public class MycompanionApplication extends SpringBootServletInitializer {
 	}
 
 	@RequestMapping(value = "/")
-   	public String hello() {
-      		return "Hello World from Tomcat";
-   	}
+	public String hello() {
+		return "Hello World from Tomcat";
+	}
 
 }

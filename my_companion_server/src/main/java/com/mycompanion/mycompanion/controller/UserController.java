@@ -22,11 +22,6 @@ public class UserController {
         userService = uService;
     }
 
-    @RequestMapping(path="/test")
-    public ResponseEntity<Object> test(){
-        return ResponseEntity.ok("a test string");
-    }
-
     @RequestMapping(path = "/register")
     public void register(@RequestBody AccountDTO user){
         userService.create(user);
@@ -50,5 +45,10 @@ public class UserController {
     public ResponseEntity<UserDTO> get(@PathVariable Long uuid){
         System.out.println("Finding user with uuid: " + uuid);
         return ResponseEntity.ok(userService.findUserWithID(uuid));
+    }
+
+    @RequestMapping(path="/test")
+    public ResponseEntity<Object> test(){
+        return ResponseEntity.ok("a test string");
     }
 }
