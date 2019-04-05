@@ -17,8 +17,8 @@ public class Temperature {
     @JoinColumn(name = "user_id")
     private User user;
     private String name;
-    private int temperature;
-    private int humidity;
+    private double temperature;
+    private double humidity;
     private LocalDateTime timestamp;
 
     public static Temperature convertFromDto(TemperatureDTO dto, User user){

@@ -2,6 +2,7 @@ package com.mycompanion.mycompanion.controller;
 
 import com.mycompanion.mycompanion.dto.AccountDTO;
 import com.mycompanion.mycompanion.dto.UserDTO;
+import com.mycompanion.mycompanion.dto.UserResponseDTO;
 import com.mycompanion.mycompanion.entity.User;
 import com.mycompanion.mycompanion.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,13 @@ public class UserController {
     @RequestMapping(path = "/register")
     public void register(@RequestBody AccountDTO user){
         userService.create(user);
+    }
+
+    @PostMapping(path = "/response", consumes = "application/json")
+    public ResponseEntity<Object> recordResponse(@RequestBody UserResponseDTO receivedResponse){
+        userService.recordUserResponse(receivedResponse);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        return new ResponseEntity<>("Saved User Response", httpHeaders, HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
