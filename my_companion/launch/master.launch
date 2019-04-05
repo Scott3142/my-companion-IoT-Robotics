@@ -1,0 +1,8 @@
+<launch>
+  <node name="tts" pkg="my_companion" type="speech_output_mycroft.py" output="screen">
+  </node>
+  <node name="repeat_phrase" pkg="my_companion" type="repeat_phrase.py" output="screen">
+  </node>
+  <node name="twitter" pkg="my_companion" type="twitter.py" output="screen">
+  </node>
+</launch>

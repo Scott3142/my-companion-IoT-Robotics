@@ -2,8 +2,26 @@ import React, { Component } from 'react';
 import AudioAnalyser from './AudioAnalyser';
 import ImageView from './Components/ImageView';
 import NotificationPrompt from './Components/NotificationPrompt';
+import AccountForm from './Components/AccountForm';
 import './App.css';
+import Dashboard from './Components/Dashboard';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { red, lightBlue } from '@material-ui/core/colors'
+import Routes from './Routes';
+import Home from './Components/Home';
+import { Redirect } from 'react-router-dom';
 const ROSLIB = require('roslib');
+const express = window.require('express');
+const bodyParser = require('body-parser');
+
+// const app = express()
+// app.use(bodyParser.json());
+// app.get('/', (req, res) => res.send('Hello World!'))
+// app.listen(5000, () => console.log(`Example app listening on port 5000!`))
+// app.post('/tweets', (req, res) => {
+//   console.log(req.body);
+//   res.status(200).send('ok')
+// });
 
 const ros = new ROSLIB.Ros({
       url: 'ws://localhost:9090'
@@ -15,11 +33,40 @@ const topic = new ROSLIB.Topic({
       messageType: 'std_msgs/String'
 });
 
+const theme = createMuiTheme({
+    palette: {
+        secondary: {
+            main: red[500]
+        },
+        primary: {
+            main: lightBlue[400],
+            contrastText: '#fff',
+        }
+    },
+    typography: {
+        // Use the system font instead of the default Roboto font.
+        fontFamily: [
+            '"Lato"',
+            'sans-serif'
+        ].join(',')
+    }
+  });
+    
 const temperature = new ROSLIB.Topic({
       ros : ros,
       name : '/temperature',
       messageType: 'my_companion/Temperature'
 });
+
+const twitter = new ROSLIB.Topic({
+  ros: ros,
+  name: '/twitter/tweet',
+  messageType: 'my_companion/Twitter'
+});
+
+twitter.subscribe(function(message) {
+  console.log(message.permalink)
+})
 
 temperature.subscribe(function(message) {
      console.log('Received message on ' + temperature.name + ': ' +  'Temperature: ' + message.temperature + ' Sensor Name: ' + message.sensorName);
@@ -45,19 +92,36 @@ ros.on('connection', () => {
       topic.publish(message);
 });
 
+/**
+ *  Material-UI has been used to create the application UI
+ *  All Material-UI references can be found on their official website: https://material-ui.com/api/
+ */
+
 class App extends Component {
   constructor(props) {
-    super(props);
-    this.state = {value: ''}
+    super(props)
+    props.express.post('/tweets', (req, res) => {
+      console.log(req.body);
+      res.status(200).send('ok');
+      this.props.saveTweets(req.body);
+      this.props.history.push({
+        pathname: '/twitter/latest',
+        state: { tweets: req.body }
+      })
+    });
+    this.state = {value: ''};
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       audio: null,
       IVStatus: false,
-      NPStatus: false
+      NPStatus: false,
+      AFStatus:true,
+      loggedIn: true,
     };
     this.toggleMicrophone = this.toggleMicrophone.bind(this);
     this.showImageView = this.showImageView.bind(this);
     this.showNotificationPrompt = this.showNotificationPrompt.bind(this);
+    this.showAccountForm = this.showAccountForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -70,7 +134,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getMicrophone();
+    
   }
 
   stopMicrophone() {
@@ -102,6 +166,14 @@ class App extends Component {
     }
   }
 
+  showAccountForm() {
+    if (this.state.AFStatus) {
+      this.setState({AFStatus: false});
+    } else {
+      this.setState({AFStatus: true});
+    }
+  }
+
   handleSubmit(event) {
     const message = new ROSLIB.Message({
       data: this.state.value
@@ -116,29 +188,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="controls">
-          {<button onClick={this.toggleMicrophone}>
-            {this.state.audio ? 'Stop Microphone' : 'Enable Microphone Input'}
-          </button> }
-          {<button onClick={this.showImageView}>
-            {this.state.IVStatus ? 'Hide IV' : 'Show IV'}
-          </button> }
-          {<button onClick={this.showNotificationPrompt}>
-            {this.state.NPStatus ? 'Hide NP' : 'Show NP'}
-          </button> }
-          <form onSubmit={this.handleSubmit}>
-           <label>
-            Name:
-              <input type="text" onChange= {this.handleChange} />
-            </label>
-            <input type="submit" value="Chat" />
-        </form>
-        </div>
-        {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
-        {this.state.IVStatus ? <ImageView /> : ''}
-        {this.state.NPStatus ? <NotificationPrompt /> : ''}
-      </div>
+      <MuiThemeProvider theme={theme}>
+          {this.state.loggedIn ? <Home/> : <AccountForm/>}
+      </MuiThemeProvider>
     );
   }
 }
